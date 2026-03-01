@@ -1,31 +1,41 @@
-import React from 'react';
-import { Modal, View, TextInput, Button, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import {collection, addDoc} from 'firebase/firestore';
-import { db } from '../firebaseConfig';
+import { addDoc, collection } from 'firebase/firestore';
+import React from 'react';
+import { Button, Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { auth, db } from '../firebaseConfig';
 
 type InputModalProps = {
   visible: boolean;
   onClose: () => void;
-  onSave?: ()=> void;
+  onSave?: () => void;
 };
 
-export default function InputModal({ visible, onClose, onSave}: InputModalProps) {
+export default function InputModal({ visible, onClose, onSave }: InputModalProps) {
   const [inputValue, setInputValue] = React.useState('');
   const [date, setDate] = React.useState(new Date());
   const [show, setShow] = React.useState(false);
 
   const handleSave = async () => {
     try {
-      await addDoc(collection(db, 'tasks'),{
+      if (!auth.currentUser) {
+        console.error("No user is currently signed in. Cannot add task.");
+        alert("You must be logged in to create a task.");
+        return;
+      }
+
+      await addDoc(collection(db, 'users', auth.currentUser.uid, 'tasks'), {
         title: inputValue,
         dueDate: date.toISOString(),
+        userId: auth.currentUser.uid, // Tie task solely to the account using it
+        createdAt: new Date().toISOString()
       });
       setInputValue('');
       onSave && onSave();
-      onClose();  
+      onClose();
     }
-    catch (error) {      console.error("Error adding document: ", error);
+    catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Failed to add task.");
     }
   };
 
@@ -34,27 +44,27 @@ export default function InputModal({ visible, onClose, onSave}: InputModalProps)
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.container}>
         <View style={styles.modalBox}>
-            <View style={styles.inputContainer}>
+          <View style={styles.inputContainer}>
             <TextInput
-                placeholder="Type..."
-                style={styles.input}
-                value={inputValue}
-                onChangeText={setInputValue}
-                multiline
+              placeholder="Type..."
+              style={styles.input}
+              value={inputValue}
+              onChangeText={setInputValue}
+              multiline
             />
-            <TouchableOpacity style={styles.dateButton}  onPress={() => setShow(true)} >
-            {show && (
+            <TouchableOpacity style={styles.dateButton} onPress={() => setShow(true)} >
+              {show && (
                 <DateTimePicker
-                value={date}
-                mode="date"
-                display="default"
-                onChange={(event, selectedDate) => {
+                  value={date}
+                  mode="date"
+                  display="default"
+                  onChange={(event, selectedDate) => {
                     setShow(false);
-                    if (selectedDate) setDate(selectedDate);   
-                }}
+                    if (selectedDate) setDate(selectedDate);
+                  }}
                 />
-            )}
-            <Text>{date ? date.toDateString() : "Pick a Date"}</Text>
+              )}
+              <Text>{date ? date.toDateString() : "Pick a Date"}</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer}>

@@ -1,50 +1,71 @@
-# Welcome to your Expo app 👋
+# TaskWatch ⏱️
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+TaskWatch is a sleek, cross-platform personal task manager designed to keep you productive across all your devices. Built with Expo and Firebase, it offers real-time syncing and a seamless user experience.
 
-## Get started
+---
 
-1. Install dependencies
+## 📱 Mobile App
 
+Manage your tasks on the go with our intuitive mobile interface.
+
+### Screenshots
+
+<div align="center">
+  <img src="taskWatchReadMeImages/androidtaskWatchLogin.jpeg" width="180" />
+  <img src="taskWatchReadMeImages/androidtaskWatchNoTasks.jpeg" width="180" />
+  <img src="taskWatchReadMeImages/androidtaskWatchWithTasks.jpeg" width="180" />
+  <img src="taskWatchReadMeImages/androidtaskWatchAddTask.jpeg" width="180" />
+  <img src="taskWatchReadMeImages/androidtaskWatchCalendar.jpeg" width="180" />
+</div>
+
+---
+
+## 🖥️ Desktop Tray Counterpart
+
+TaskWatch isn't just for your phone. It includes a dedicated **Desktop Tray Counterpart** that lives in your system tray, ensuring your tasks are always just a click away.
+
+- **Real-time Syncing**: Tasks added on mobile appear instantly on desktop, and vice versa.
+- **Micro-interactions**: Quick-add and quick-view features designed for minimal disruption.
+
+### Screenshots
+
+<div align="center">
+  <img src="taskWatchReadMeImages/taskwatchnotifierlogin.jpg" width="400" />
+  <img src="taskWatchReadMeImages/taskWatchDesktopNoTask.jpg" width="400" />
+  <br/>
+  <img src="taskWatchReadMeImages/taskWatchDesktopApp.jpg" width="400" />
+  <img src="taskWatchReadMeImages/taskWatchNotifierQuickAdd.png" width="400" />
+  <br/>
+  <img src="taskWatchReadMeImages/trayIconDropdown.jpg" width="200" />
+</div>
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) (Latest LTS)
+- [Expo Go](https://expo.dev/go) app on your mobile device (for development)
+
+### 2. Setup
+1. Clone the repository.
+2. Install dependencies:
    ```bash
    npm install
    ```
+3. Configure Environment Variables:
+   - Copy `.env.example` to `.env`.
+   - Fill in your Firebase configuration keys in `.env`.
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 3. Run the App
 ```bash
-npm run reset-project
+npx expo start
 ```
+Scan the QR code with your Expo Go app or use an emulator.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🛠️ Tech Stack
+- **Frontend**: React Native, Expo, Expo Router
+- **Backend**: Firebase (Auth, Firestore)
+- **Styling**: Vanilla CSS / React Native Styles
